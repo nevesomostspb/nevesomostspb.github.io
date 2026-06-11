@@ -1,1 +1,664 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Невесомость — флоатинг-студия в Санкт-Петербурге</title>
+<meta name="description" content="Флоатинг-студия «Невесомость» в Санкт-Петербурге: тишина, вода, легкость и полное расслабление.">
+<style>
+:root {
+  --bg:#140c07;
+  --bg2:#21130b;
+  --card:#20150f;
+  --card2:#2a1b12;
+  --cream:#f2e7da;
+  --muted:#cbb9a6;
+  --line:rgba(242,231,218,.16);
+  --blue:#47b8ff;
+  --gold1:#f7e7d1;
+  --gold2:#b7906d;
+  --shadow:0 24px 80px rgba(0,0,0,.38);
+  --radius:30px;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  font-family: Arial, Helvetica, sans-serif;
+  color:var(--cream);
+  background:
+    radial-gradient(circle at 78% 5%, rgba(71,184,255,.11), transparent 27%),
+    radial-gradient(circle at 10% 0%, rgba(247,216,179,.11), transparent 30%),
+    linear-gradient(180deg,#20130c 0%,#120b07 62%,#0b0705 100%);
+  line-height:1.62;
+}
+body.menu-open { overflow:hidden; }
+a { color:inherit; text-decoration:none; }
+img { max-width:100%; display:block; }
+.container { width:min(1160px, calc(100% - 36px)); margin:0 auto; }
 
+.header {
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:rgba(18,11,7,.78);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(16px);
+}
+.nav {
+  height:76px;
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+}
+.brand {
+  display:flex; align-items:center; gap:12px;
+  text-transform:uppercase; letter-spacing:.16em;
+  font-size:13px; color:#f7efe5; font-weight:600;
+}
+.brand-mark {
+  width:48px; height:48px; border-radius:50%;
+  overflow:hidden; flex:0 0 48px;
+  border:1px solid rgba(242,231,218,.22);
+  background:#2a190e;
+  display:flex; align-items:center; justify-content:center;
+}
+.brand-mark img {
+  width:100%; height:100%; object-fit:cover; object-position:center;
+}
+.menu-btn {
+  width:46px; height:46px; border-radius:50%;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.06);
+  color:var(--cream);
+  font-size:22px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+.menu-btn:hover { background:rgba(71,184,255,.14); }
+.menu {
+  position:fixed; top:90px; right:18px;
+  width:min(390px, calc(100% - 36px));
+  max-height:calc(100vh - 115px);
+  overflow:auto;
+  padding:22px;
+  border-radius:26px;
+  background:#1a100a;
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  opacity:0; pointer-events:none; transform:translateY(-10px);
+  transition:.2s ease;
+  z-index:1001;
+}
+.menu.open { opacity:1; pointer-events:auto; transform:translateY(0); }
+.menu-title {
+  font-family:Georgia, 'Times New Roman', serif;
+  font-size:30px; margin:0 0 14px;
+}
+.menu a {
+  display:block;
+  padding:13px 14px;
+  border-radius:16px;
+  color:rgba(242,231,218,.92);
+  border:1px solid transparent;
+}
+.menu a:hover { background:rgba(255,255,255,.07); border-color:var(--line); }
+.overlay {
+  position:fixed; inset:0; background:rgba(0,0,0,.46);
+  opacity:0; pointer-events:none; z-index:999;
+}
+.overlay.open { opacity:1; pointer-events:auto; }
+
+section { padding:92px 0; scroll-margin-top:90px; }
+.hero { min-height:100vh; display:flex; align-items:center; padding-top:124px; }
+.hero-grid {
+  display:grid; grid-template-columns:.9fr 1.1fr; gap:54px; align-items:center;
+}
+.eyebrow {
+  display:inline-flex; align-items:center; gap:12px;
+  font-size:12px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--muted); font-weight:700;
+}
+.eyebrow::before { content:""; width:46px; height:1px; background:linear-gradient(90deg,var(--blue),var(--muted)); }
+h1,h2,h3 {
+  font-family:Georgia, 'Times New Roman', serif; font-weight:400;
+  line-height:1.05; margin:0;
+}
+h1 { font-size:clamp(62px,8vw,122px); letter-spacing:.045em; margin:22px 0 18px; }
+.hero-sub { font-size:clamp(21px,2.2vw,32px); margin:0 0 12px; }
+.lead { color:var(--muted); font-size:19px; max-width:590px; margin:0; }
+.actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:34px; }
+.btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:15px 24px; border-radius:999px;
+  border:1px solid transparent;
+  font-weight:700; cursor:pointer;
+}
+.btn-primary { color:#1d120c; background:linear-gradient(135deg,var(--gold1),var(--gold2)); box-shadow:0 18px 50px rgba(183,144,109,.22); }
+.btn-secondary { border-color:rgba(242,231,218,.22); background:rgba(255,255,255,.055); }
+.btn:hover { transform:translateY(-1px); }
+
+.hero-side { display:flex; flex-direction:column; gap:18px; }
+.hero-img {
+  aspect-ratio:16/9;
+  border-radius:38px;
+  overflow:hidden;
+  background:#20130c;
+  box-shadow:var(--shadow);
+}
+.hero-img img { width:100%; height:100%; object-fit:cover; object-position:center; }
+.hero-note {
+  padding:22px 24px;
+  border-radius:26px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.055);
+  box-shadow:var(--shadow);
+}
+.hero-note span {
+  display:block; color:var(--muted);
+  font-size:13px; letter-spacing:.18em; text-transform:uppercase;
+  margin-bottom:6px;
+}
+.hero-note strong {
+  display:block; font-family:Georgia, 'Times New Roman', serif;
+  font-size:clamp(27px,3vw,38px); font-weight:400;
+}
+
+.section-title { font-size:clamp(40px,5vw,72px); letter-spacing:.02em; }
+.section-text { color:var(--muted); font-size:18px; max-width:720px; margin:18px 0 0; }
+.card {
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));
+  box-shadow:var(--shadow);
+  padding:32px;
+}
+.about-grid { display:grid; grid-template-columns:.85fr 1.15fr; gap:24px; align-items:stretch; }
+.about-photo { border-radius:var(--radius); overflow:hidden; min-height:390px; box-shadow:var(--shadow); }
+.about-photo img { width:100%; height:100%; object-fit:cover; }
+.split { display:grid; grid-template-columns:1fr 1fr; gap:28px; align-items:center; }
+.split-img { height:520px; border-radius:32px; overflow:hidden; box-shadow:var(--shadow); }
+.split-img img { width:100%; height:100%; object-fit:cover; }
+
+.steps { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; counter-reset:step; }
+.step { min-height:150px; }
+.step::before {
+  counter-increment:step; content:"0" counter(step);
+  font-family:Georgia, 'Times New Roman', serif; font-size:50px; color:rgba(71,184,255,.38);
+}
+.step p { margin:10px 0 0; }
+
+.benefits { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+.benefit {
+  padding:20px 22px; border-radius:24px;
+  border:1px solid var(--line); background:rgba(255,255,255,.045);
+}
+.benefit::before {
+  content:""; display:block; width:38px; height:1px; background:var(--blue);
+  box-shadow:0 0 18px rgba(71,184,255,.6); margin-bottom:14px;
+}
+
+.slider {
+  display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory;
+  padding:4px 4px 22px;
+}
+.slide {
+  flex:0 0 min(76vw,740px);
+  height:520px;
+  border-radius:32px;
+  overflow:hidden;
+  position:relative;
+  background:#20130c;
+  box-shadow:var(--shadow);
+  scroll-snap-align:start;
+}
+.slide img { width:100%; height:100%; object-fit:cover; }
+.slide span {
+  position:absolute; left:22px; bottom:22px;
+  padding:9px 14px; border-radius:999px;
+  background:rgba(16,10,7,.68);
+  border:1px solid rgba(255,255,255,.15);
+  backdrop-filter:blur(8px);
+}
+
+.price-grid { display:grid; grid-template-columns:1.08fr .92fr; gap:24px; }
+.price-main { background:linear-gradient(135deg,rgba(242,231,218,.12),rgba(71,184,255,.08)); }
+.price { font-family:Georgia, 'Times New Roman', serif; font-size:78px; line-height:1; margin:24px 0; }
+.price small { color:var(--muted); font-size:28px; }
+.price-list { display:grid; gap:14px; }
+.price-item {
+  display:flex; justify-content:space-between; gap:20px;
+  padding:22px; border-radius:23px; border:1px solid var(--line);
+  background:rgba(255,255,255,.045);
+}
+
+.faq { display:grid; gap:14px; }
+.faq details {
+  border:1px solid var(--line); border-radius:24px;
+  background:rgba(255,255,255,.045);
+  overflow:hidden;
+}
+.faq summary {
+  list-style:none; cursor:pointer;
+  display:flex; justify-content:space-between; gap:20px;
+  padding:24px; font-size:18px;
+}
+.faq summary::-webkit-details-marker { display:none; }
+.faq summary::after { content:"+"; font-size:26px; color:var(--blue); line-height:1; }
+.faq details[open] summary::after { content:"−"; }
+.faq p { color:var(--muted); margin:0; padding:0 24px 24px; }
+
+.booking-layout { display:block; }
+.booking-card { max-width:720px; width:100%; margin:0 auto; }
+form { display:grid; gap:14px; margin-top:24px; }
+input,textarea {
+  width:100%; padding:16px 18px;
+  border-radius:18px; border:1px solid var(--line);
+  background:rgba(255,255,255,.06); color:white;
+  font:inherit; outline:none;
+}
+textarea { min-height:122px; resize:vertical; }
+input::placeholder, textarea::placeholder { color:rgba(242,231,218,.48); }
+.field-label {
+  margin:4px 0 -8px; color:var(--muted);
+  font-size:13px; letter-spacing:.08em; text-transform:uppercase;
+}
+.notice {
+  margin-top:16px; padding:14px 16px; border-radius:18px;
+  background:rgba(71,184,255,.12);
+  border:1px solid rgba(71,184,255,.2);
+  color:#dff1ff; font-size:14px;
+}
+
+.contacts-card {
+  width:100%; margin-top:28px;
+}
+.contact-info-grid {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px;
+  margin:26px 0 20px;
+}
+.contact-line {
+  display:grid; grid-template-columns:135px minmax(0,1fr); gap:18px;
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:rgba(255,255,255,.045);
+  align-items:start;
+}
+.contact-line span { color:var(--muted); }
+.contact-line a, .contact-line strong {
+  overflow-wrap:break-word; word-break:normal;
+}
+.socials { display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 24px; }
+.social {
+  width:48px; height:48px; border-radius:50%;
+  display:inline-flex; align-items:center; justify-content:center;
+  border:1px solid var(--line); background:rgba(255,255,255,.07);
+  font-weight:700;
+}
+.social:hover { background:rgba(71,184,255,.18); }
+.map-title {
+  color:var(--muted); font-size:13px; letter-spacing:.13em; text-transform:uppercase;
+  margin:20px 0 12px;
+}
+.map-card {
+  border:1px solid var(--line); border-radius:28px; overflow:hidden;
+  background:rgba(255,255,255,.045);
+}
+.map-card-top {
+  display:flex; justify-content:space-between; align-items:center; gap:18px;
+  padding:24px 26px; border-bottom:1px solid var(--line);
+}
+.map-card-address { color:var(--muted); font-size:18px; line-height:1.55; }
+.map-card-button {
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:14px 22px; border-radius:999px;
+  background:linear-gradient(135deg,var(--gold1),var(--gold2));
+  color:#1d120c; font-weight:700; white-space:nowrap;
+}
+.map-card-image { display:block; cursor:pointer; }
+.map-card-image img { width:100%; height:420px; object-fit:cover; }
+
+.footer { padding:34px 0; border-top:1px solid var(--line); color:var(--muted); }
+.footer-inner { display:flex; justify-content:space-between; gap:20px; }
+
+.only-clickable-note { display:none; }
+
+@media (max-width:1050px) {
+  .hero-grid,.about-grid,.split,.price-grid { grid-template-columns:1fr; }
+  .steps,.benefits { grid-template-columns:1fr 1fr; }
+  .slide { flex-basis:86vw; }
+}
+@media (max-width:760px) {
+  .container { width:min(100% - 28px,1160px); }
+  .nav { height:72px; }
+  .brand span:last-child { font-size:12px; }
+  section { padding:70px 0; }
+  .hero { padding-top:108px; }
+  .hero-img { border-radius:26px; }
+  .steps,.benefits,.contact-info-grid { grid-template-columns:1fr; }
+  .slide { height:430px; border-radius:26px; }
+  .split-img { height:430px; border-radius:26px; }
+  .price { font-size:58px; }
+  .contact-line { grid-template-columns:112px minmax(0,1fr); gap:12px; }
+  .map-card-top { padding:20px; }
+  .map-card-address { font-size:17px; }
+  .map-card-button { padding:13px 18px; }
+  .map-card-image img { height:360px; }
+  .footer-inner { display:block; }
+}
+@media (max-width:430px) {
+  .contact-line { grid-template-columns:1fr; gap:6px; }
+  .map-card-top { align-items:flex-start; flex-direction:column; }
+}
+
+/* Надежное мобильное меню без зависимости от кнопки-скрипта */
+.menu-details {
+  position:relative;
+  z-index:1200;
+}
+.menu-details summary {
+  list-style:none;
+}
+.menu-details summary::-webkit-details-marker {
+  display:none;
+}
+.menu-details[open] .menu {
+  opacity:1 !important;
+  pointer-events:auto !important;
+  transform:translateY(0) !important;
+}
+.menu-details .menu {
+  top:64px !important;
+  right:0 !important;
+  position:absolute !important;
+  z-index:1400 !important;
+  width:390px !important;
+  max-width:calc(100vw - 36px) !important;
+}
+.menu-details[open] summary {
+  background:rgba(71,184,255,.16);
+}
+@media (max-width:760px) {
+  .menu-details .menu {
+    position:fixed !important;
+    top:82px !important;
+    left:14px !important;
+    right:14px !important;
+    width:auto !important;
+  }
+}
+
+
+/* Подпись рядом с логотипом — более изящный стиль, как у бренда */
+.brand > span:last-child {
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 20px !important;
+  font-weight: 400 !important;
+  letter-spacing: .08em !important;
+  text-transform: none !important;
+  color: #f2e7da !important;
+}
+@media (max-width:760px) {
+  .brand > span:last-child {
+    font-size: 18px !important;
+    letter-spacing: .07em !important;
+  }
+}
+
+
+.social img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#home" aria-label="Невесомость">
+      <span class="brand-mark"><img src="images/image_01.jpg" alt="Логотип Невесомость"></span>
+      <span>Невесомость</span>
+    </a>
+    <details class="menu-details">
+      <summary class="menu-btn" aria-label="Открыть содержание сайта">☰</summary>
+      <nav class="menu" aria-label="Содержание сайта">
+  <div class="menu-title">Содержание сайта</div>
+  <a href="#studio">О студии</a>
+  <a href="#floating">О флоатинге</a>
+  <a href="#session">Как проходит сеанс</a>
+  <a href="#benefits">Преимущества</a>
+  <a href="#gallery">Наша студия</a>
+  <a href="#price">Стоимость</a>
+  <a href="#faq">Вопросы и ответы</a>
+  <a href="#contacts">Контакты</a>
+  <a href="#booking">Записаться</a>
+</nav>
+    </details>
+  </div>
+</header>
+
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow">Премиальная студия флоатинга</span>
+      <h1>Невесомость</h1>
+      <p class="hero-sub">Флоатинг-студия в Санкт-Петербурге</p>
+      <p class="lead">Один час тишины, теплой воды и полного расслабления.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#booking">Записаться на сеанс</a>
+        <a class="btn btn-secondary" href="#floating">О флоатинге</a>
+      </div>
+    </div>
+    <div class="hero-side">
+      <div class="hero-img"><img src="images/image_02.jpg" alt="Гостья отдыхает в флоатинг-капсуле"></div>
+      <div class="hero-note">
+        <span>Тишина · вода · легкость</span>
+        <strong>Личное пространство для восстановления</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="studio">
+  <div class="container about-grid">
+    <div class="card">
+      <span class="eyebrow">О студии</span>
+      <h2 class="section-title">Пространство для отдыха от города</h2>
+      <p class="section-text">«Невесомость» — это студия, где можно остановиться, выдохнуть и восстановить силы. Здесь нет шума и спешки — только вода, мягкий свет и ощущение легкости.</p>
+    </div>
+    <div class="about-photo"><img src="images/image_03.jpg" alt="Ресепшн студии Невесомость"></div>
+  </div>
+</section>
+
+<section id="floating">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">О флоатинге</span>
+      <h2 class="section-title">Что такое флоатинг?</h2>
+      <p class="section-text">Флоатинг — это расслабляющая процедура в капсуле с теплой соленой водой. Благодаря высокой концентрации соли тело легко держится на поверхности, мышцы расслабляются, а ощущение невесомости помогает снять напряжение, восстановить силы и успокоить нервную систему.</p>
+    </div>
+    <div class="split-img"><img src="images/image_04.jpg" alt="Белая флоатинг-капсула с голубым светом"></div>
+  </div>
+</section>
+
+<section id="session">
+  <div class="container">
+    <span class="eyebrow">Процесс</span>
+    <h2 class="section-title">Как это проходит?</h2>
+    <div style="height:32px"></div>
+    <div class="steps">
+      <div class="card step"><p>Вы приходите в студию.</p></div>
+      <div class="card step"><p>Принимаете душ.</p></div>
+      <div class="card step"><p>Погружаетесь в капсулу.</p></div>
+      <div class="card step"><p>Расслабляетесь в тишине.</p></div>
+      <div class="card step"><p>Завершаете сеанс и отдыхаете.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="benefits">
+  <div class="container">
+    <span class="eyebrow">Эффект</span>
+    <h2 class="section-title">Почему выбирают флоатинг?</h2>
+    <div style="height:32px"></div>
+    <div class="benefits">
+      <div class="benefit">Помогает расслабиться;</div>
+      <div class="benefit">Снижает ощущение стресса;</div>
+      <div class="benefit">Дает отдых от шума и телефона;</div>
+      <div class="benefit">Помогает восстановиться после нагрузки;</div>
+      <div class="benefit">Создает атмосферу тишины, уюта и личного пространства.</div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="container">
+    <span class="eyebrow">Пространство</span>
+    <h2 class="section-title">Наша студия</h2>
+    <p class="section-text">В «Невесомости» все продумано для спокойного отдыха: чистые капсулы, мягкий свет, приватные зоны и уютное пространство после сеанса.</p>
+    <div style="height:32px"></div>
+    <div class="slider" aria-label="Фотографии студии">
+      <div class="slide"><img src="images/image_05.jpg" alt="Гостья у флоатинг-капсулы"><span>Атмосфера студии</span></div>
+      <div class="slide"><img src="images/image_06.jpg" alt="Душевая зона"><span>Душевая зона</span></div>
+      <div class="slide"><img src="images/image_07.jpg" alt="Зона отдыха"><span>Зона отдыха</span></div>
+      <div class="slide"><img src="images/image_08.jpg" alt="Халаты, полотенца и тапочки"><span>Чистота и забота</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="container price-grid">
+    <div class="card price-main">
+      <span class="eyebrow">Стоимость</span>
+      <h2 class="section-title">1 час флоатинга</h2>
+      <div class="price">3500 <small>₽</small></div>
+      <p class="section-text">В стоимость входит: капсула, душ, полотенце, средства гигиены и зона отдыха после сеанса.</p>
+      <div class="actions"><a class="btn btn-primary" href="#booking">Забронировать сеанс</a></div>
+    </div>
+    <div class="price-list">
+      <div class="price-item"><strong>Парный визит</strong><span>6500 ₽</span></div>
+      <div class="price-item"><strong>Абонемент на 4 сеанса</strong><span>12 000 ₽</span></div>
+      <div class="price-item"><strong>Подарочный сертификат</strong><span>от 3500 ₽</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="section-title">Вопросы и ответы</h2>
+    <div style="height:32px"></div>
+    <div class="faq">
+      <details>
+        <summary>Нужно ли брать что-то с собой?</summary>
+        <p>Нет, все необходимое есть в студии: полотенце, душ, средства гигиены и зона отдыха после сеанса.</p>
+      </details>
+      <details>
+        <summary>Можно ли прийти вдвоем?</summary>
+        <p>Да, можно записаться на парный визит и провести время в студии вместе.</p>
+      </details>
+      <details>
+        <summary>Можно ли выключить свет и музыку?</summary>
+        <p>Да, во время процедуры можно выбрать комфортный режим: оставить мягкую подсветку и музыку или расслабиться в полной тишине.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="booking">
+  <div class="container booking-layout">
+    <div class="card booking-card">
+      <span class="eyebrow">Запись</span>
+      <h2 class="section-title">Записаться в «Невесомость»</h2>
+      <p class="section-text">Оставьте заявку, и администратор свяжется с вами для подтверждения записи.</p>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Имя" required>
+        <input type="tel" name="phone" placeholder="Телефон" required>
+        <label class="field-label" for="date">Желаемая дата</label>
+        <input id="date" type="date" name="date" required>
+        <label class="field-label" for="time">Желаемое время</label>
+        <input id="time" type="time" name="time" required>
+        <textarea name="comment" placeholder="Комментарий"></textarea>
+        <button class="btn btn-primary" type="submit">Отправить заявку</button>
+      </form>
+      <div class="notice">Форма демонстрационная: на готовом сайте ее можно подключить к почте, CRM или мессенджеру.</div>
+    </div>
+
+    <div class="card contacts-card" id="contacts">
+      <span class="eyebrow">Контакты</span>
+      <h2 class="section-title">Контактная информация</h2>
+      <div class="contact-info-grid">
+        <div class="contact-line"><span>Телефон</span><a href="tel:+79215883538">+7 921 588-35-38</a></div>
+        <div class="contact-line"><span>Почта</span><a href="mailto:nevesomost@inbox.ru">nevesomost@inbox.ru</a></div>
+        <div class="contact-line"><span>Адрес</span><a href="https://yandex.ru/maps?ol=geo&text=%D0%A8%D0%BF%D0%B0%D0%BB%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0,%2038&sll=30.360299,59.949132&sspn=0.004119,0.008211&si=2kxrvyqqcchk13d98ewct9p5y0" target="_blank" rel="noopener noreferrer">Санкт-Петербург, м. Чернышевская, Шпалерная улица, 38</a></div>
+        <div class="contact-line"><span>График работы</span><strong>Ежедневно с 10:00 до 22:00</strong></div>
+      </div>
+      <div class="socials" aria-label="Социальные сети">
+        <a class="social" href="https://vk.ru/club239513217" target="_blank" rel="noopener noreferrer" title="ВКонтакте" aria-label="ВКонтакте"><img src="images/image_09.png" alt="ВКонтакте"></a>
+        <a class="social" href="https://ok.ru/group/70000052748002" target="_blank" rel="noopener noreferrer" title="Одноклассники" aria-label="Одноклассники"><img src="images/image_10.png" alt="Одноклассники"></a>
+        <a class="social" href="https://pin.it/5XqsWwQ2x" target="_blank" rel="noopener noreferrer" title="Pinterest" aria-label="Pinterest"><img src="images/image_11.png" alt="Pinterest"></a>
+        <a class="social" href="https://max.ru/join/zVG7DBWwjFqecHdhRay0P2LUSqMX5J0SlmnlWi8HFqg" target="_blank" rel="noopener noreferrer" title="Max" aria-label="Max"><img src="images/image_12.png" alt="Max"></a>
+      </div>
+      <div class="map-title">Карта</div>
+      <div class="map-card">
+        <div class="map-card-top">
+          <div class="map-card-address">Санкт-Петербург,<br>Шпалерная улица,<br>дом 38</div>
+          <a class="map-card-button" href="https://yandex.ru/maps?ol=geo&text=%D0%A8%D0%BF%D0%B0%D0%BB%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0,%2038&sll=30.360299,59.949132&sspn=0.004119,0.008211&si=2kxrvyqqcchk13d98ewct9p5y0" target="_blank" rel="noopener noreferrer">Открыть карту</a>
+        </div>
+        <div class="map-card-image"><img src="images/image_13.jpg" alt="Карта: Шпалерная улица, 38"></div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© 2026 Невесомость · студия флоатинга</div>
+    <div>Санкт-Петербург, Шпалерная улица, 38</div>
+  </div>
+</footer>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const menuDetails = document.querySelector('.menu-details');
+  if (menuDetails) {
+    menuDetails.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        menuDetails.removeAttribute('open');
+      });
+    });
+  }
+
+  document.querySelectorAll('a[href="#booking"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector('#booking');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  document.querySelectorAll('a[href="#floating"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector('#floating');
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const form = document.querySelector('#contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Спасибо! Заявка подготовлена. Администратор свяжется с вами после подключения формы к почте или CRM.');
+    });
+  }
+});
+</script>
+
+</body>
+</html>
